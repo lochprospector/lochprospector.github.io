@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Metadata -->
+<head>
+  <meta charset="utf-8">
+  
+  <!-- Title -->
+  <title>Loch Prospector: MetaData Visualization for Lakes of Open Data</title>
+
+  <!-- CSS Styling -->
+  <link rel="stylesheet" href="style.css">
+ 
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+  <link rel="manifest" href="favicons/site.webmanifest">
+  <link rel="shortcut icon" href="favicons/favicon.ico">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-config" content="favicons/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<!-- Main page content -->
+<body>
+
+  <span id="forkongithub"><a href="https://github.com/lochprospector/lochprospector.github.io">Fork me on GitHub</a></span>
+  
+  <div class = "content-column">
+  
+	<h1>Loch Prospector: MetaData Visualization for Lakes of Open Data</h1>
+	
+	
+	<h1>Motivation</h1>
+	
+	<p><a href="https://rjmillerlab.github.io/data-lake-tutorial-slides/">Research on managing open data</a> requires an appropriate collection of such datasets in order to test novel algorithms and techniques. Gaining insights about their properties can also inform the process of designing algorithms or benchmarks. Currently, the interface of most open data portals is limited in that regard.</p>
+	
+
+	
+	<h1>Visualization</h1>
+	
+	<p>Here we provide a visualization that uses Multidimensional Scaling (MDS) to depict datasets from <a href="https://www.data.gov/">https://www.data.gov/</a>.
+		We focus on four <em>structural</em> (metadata) attributes of the datasets:</p>
+	<ul>
+  		<li>The number of rows</li>
+  		<li>The number of columns</li>
+  		<li>The percentage of null values</li>
+  		<li>The percentage of unique values (those that appear only once in the column)</li>
+	</ul>
+	<p>	We also show (on the right) the distribution of these 4 attributes for each selection of datasets.
+	</p>
+  
+
+	<h1>How MDS works</h1>
+	
+	<p>
+		<a href="https://en.wikipedia.org/wiki/Multidimensional_scaling">Multidimensional Scaling</a> can help us encode many attributes in the same visualization. For each pair of datasets d<sub>1</sub>,d<sub>2</sub> we calculate their (weighted) Euclidean distance:
+	</p>
+
+  <p> \( \begin{align} dist(d_1, d_2) = & [w_r(d_1.rows-d_2.rows)^2 +   w_c(d_1.cols-d_2.cols)^2  + \\& w_n(d_1.nulls-d_2.nulls)^2+  w_u(d_1.unqs-d_2.unqs)^2]^{1/2} \end{align}\)</p>
+
+	<p>
+	An MDS algorithm then places the points (i.e., datasets) in a 2-dimensional space such that these distances are preserved as much as possible.	
+	</p>
+	
+  </div>
+  
+  <!-- Visualization here -->
+  <div class="vis-holder">
+
+	<div id="dataType">
+		<h4>Select the data type that you are interested in:</h4>
+		<form>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="radio-inline">
+          <input type="radio" name="dataType" value="All" checked>All
+        </label>
+			<label class="radio-inline">
+				<input type="radio" name="dataType" value="Numerical">Numerical
+			</label>
+			<label class="radio-inline">
+				<input type="radio" name="dataType" value="Categorical">Categorical
+      </label>
+      </div>
+		</form>
+	</div>
+
+	
+	<div id="settings-box-holder">
+		<h4>Adjust the weights according to when two datasets are similar<br/>(higher weight places more importance to an attribute)</h4>
+		<form>
+      <table>
+        <tr>
+          <td>
+		<label for="weight_nrows" id="weight_nrows_text">Number of rows:</label> </td>
+		<td><input type="number" step='0.1' value='1.00' placeholder='0.00' id="weight_nrows" name="weight_nrows" class="form-control-sm"><br></td></tr>
+		<tr><td><label for="weight_ncols" id="weight_ncols_text">Number of columns (Total):</label> </td>
+		<td><input type="number" step='0.1' value='1.00' placeholder='0.00' id="weight_ncols" name="weight_ncols" class="weight_setting form-control-sm"><br></td></tr>
+		<tr><td><label for="weight_null" id="weight_null_text">Null Values (Total):</label></td>
+		<td><input type="number" step='0.1' value='1.00' placeholder='0.00' id="weight_null" name="weight_null" class="weight_setting form-control-sm"><br></td></tr>
+		<tr><td><label for="weight_unique" id="weight_unique_text">Unique Values (Total):</label></td>
+		<td><input type="number" step='0.1' value='1.00' placeholder='0.00' id="weight_unique" name="weight_unique" class="weight_setting form-control-sm"><br></td></tr>
+    </table>
+		</form>
+		
+  </div>
+  
+  <div id="visuals">
+    <div id="filters">
+      <h3 id="filter-head">Filters</h3>
+      <p class="filter-heading">Number of Rows</p>
+      <div class="row align-items-center">
+      <!-- <div class="col-sm-2"><p id="value-range"></p></div> -->
+      <div class="col-sm"><div id="slider-range"></div></div>
+      </div>
+      <p class="filter-heading">Number of Categorical Columns</p>
+      <div class="row align-items-center">
+      <!-- <div class="col-sm-2"><p id="value-range"></p></div> -->
+      <div class="col-sm"><div id="cat-col-range"></div></div>
+      </div>
+      <p class="filter-heading">Number of Numerical Columns</p>
+      <div class="row align-items-center">
+      <!-- <div class="col-sm-2"><p id="value-range"></p></div> -->
+      <div class="col-sm"><div id="num-col-range"></div></div>
+      </div>
+      <p class="filter-heading">Percentage of Unique Values (Categorical)</p>
+      <div class="row align-items-center">
+      <div class="col-sm"><div id="uniq-cat-range"></div></div>
+      </div>
+      <p class="filter-heading">Percentage of Null Values (Categorical)</p>
+      <div class="row align-items-center">
+      <div class="col-sm"><div id="null-cat-range"></div></div>
+      </div>
+      <p class="filter-heading">Percentage of Unique Values (Numerical)</p>
+      <div class="row align-items-center">
+      <div class="col-sm"><div id="uniq-num-range"></div></div>
+      </div>
+      <p class="filter-heading">Percentage of Null Values (Numerical)</p>
+      <div class="row align-items-center">
+      <div class="col-sm"><div id="null-num-range"></div></div>
+      </div>
+      <button type="button" class="btn btn-outline-primary" id="reset-filters-btn" >Reset Filters</button>
+    </div>
+    
+    <div id="dist-summary">
+      <h3>Distribution Summary</h3>
+      <div id="num-rows"></div>
+      <div id="num-col"></div>
+      <div id="null-perc"></div>
+      <div id="uniq-perc"></div>
+    </div>
+    
+    <svg id="vis-svg-1"
+      preserveAspectRatio="xMidYMid meet" class="vis-svg" viewBox="0 0 1000 1000" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    </svg>
+    <p style="text-align:center">MDS Plot: Datasets are embedded into 2D-space such that datasets that are closer together are more similar.</p>
+  </div>
+  </div>
+  
+  
+  <div class = "content-column">
+
+  <h1>Acknowledgments</h1>
+  
+	<ul>
+    <li><a href="https://d3js.org/">D3: Data-Driven Documents</a> by Mike Bostock.</li>
+    <li><a href="https://www.mathjax.org/">MathJax</a></li>
+	  <li><a href="https://codepo8.github.io/css-fork-on-github-ribbon/#">Pure CSS responsive "Fork me on GitHub" ribbon</a> by Chris Heilmann.</li>
+	  <li><a href="https://github.com/benfred/mds.js">An implementation of MDS</a> by Ben Frederickson.</li>
+	  <li><a href="https://bost.ocks.org/mike/chart/">Reusable Charts for Scatterplot</a> by Mike Bostock.</li>
+	  <li><a href="https://bl.ocks.org/johnwalley/e1d256b81e51da68f7feb632a53c3518">Sliders for filters</a>.</li>
+	  <li><a href="https://www.d3-graph-gallery.com/graph/histogram_basic.html">Histogram chart</a> by Yan Holtz and <a href="https://observablehq.com/@d3/histogram">also</a> by Mike Bostock.</li>
+	  <li><a href="https://bl.ocks.org/mthh/99dc420cd7e276ecafe4ef4bf12c6927">Cooperative brush and tooltip</a> by Matthieu Viry.</li>
+	</ul>
+	
+  </div>
+  
+  <!-- Scripts at the end avoid need for dealing with async, defer, or onload event handlers -->
+  <script src="lib/d3.v5.15.0/d3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="https://unpkg.com/d3-simple-slider"></script>
+  <script src="js/mds.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/scatterplot.js"></script>
+  <script src="js/histogram.js"></script>
+  <script src="js/visualization.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,188 @@
+/* General formatting */
+body {
+	padding: 0 10px;
+	font: 18px/1.5 -apple-system, BlinkMacSystemFont, "avenir next",avenir, "Segoe UI", "lucida grande", "helvetica neue", helvetica, "Fira Sans",roboto, noto, "Droid Sans", cantarell, oxygen, ubuntu, "franklin gothic medium", "century gothic", "Liberation Sans",
+	sans-serif;
+}
+
+h1, h2, h3 {
+	line-height: 1.2
+}
+
+/* Your text should be in a nice narrow column */
+.content-column {
+	max-width: 650px;
+	margin: 40px auto;
+}
+
+.title {
+	max-width: 650px;
+	margin: 40px auto;
+	font-size: 30px;
+	color: #69b3a2;
+}
+
+/* But your visualization should be full-width and full-height */
+.vis-holder {
+  width: 50%;
+  height: 100%;
+  margin: auto;
+}
+
+.vis-svg {
+  background-color: #f4f1f0;
+}
+
+/* Fork on GitHub ribbon via https://codepo8.github.io/css-fork-on-github-ribbon/# */  
+#forkongithub a{
+	background:#00F;
+	color:#fff;
+	text-decoration:none;
+	font-family:arial,sans-serif;
+	text-align:center;
+	font-weight:bold;
+	padding:5px 40px;
+	font-size:1rem;
+	line-height:1.4rem;
+	position:relative;
+	transition:0.5s;
+}
+#forkongithub a:hover{
+	background:#118;
+	color:#fff;
+}
+#forkongithub a::before,#forkongithub a::after{
+	content:"";
+	width:100%;
+	display:block;
+	position:absolute;
+	top:1px;
+	left:0;
+	height:1px;
+	background:#fff;
+}
+#forkongithub a::after{
+	bottom:1px;
+	top:auto;
+}
+@media screen and (min-width:1000px){
+	#forkongithub{
+		position:absolute;
+		display:block;
+		top:0;
+		right:0;
+		width:200px;
+		overflow:hidden;
+		height:200px;
+		z-index:9999;
+	}
+	#forkongithub a{
+		width:200px;
+		position:absolute;
+		top:60px;
+		right:-60px;
+		transform:rotate(45deg);
+		-webkit-transform:rotate(45deg);
+		-ms-transform:rotate(45deg);
+		-moz-transform:rotate(45deg);
+		-o-transform:rotate(45deg);
+		box-shadow:4px 4px 10px rgba(0,0,0,0.8);
+	}
+	#filters {
+		margin: 0;
+		position: inherit;
+	}
+}
+
+/* Default style for marks and channels used */
+.point {
+	fill: white;
+	stroke: #3399ff;
+	stroke-width: 1;
+  }
+
+.axisLabel {
+  fill: #475d7c;
+}
+
+/* Style for selected marks (circles) */
+circle.selected {
+  fill: pink;
+  stroke: red;
+  opacity: 0.5;
+}
+
+/* Style for marks (circles) when hovered */
+circle.hover {
+  fill: darkred;
+  stroke: darkred;
+  opacity: 0.7;
+}
+
+/* Style for marks (bars) */
+.barmark {
+  fill: #3399ff;
+}
+
+/* Style for marks (bars) when hovered */
+.barmark.hover {
+  fill: darkred;
+  stroke: darkred;
+  opacity: 0.7;
+}
+
+#filters {
+	float: left;
+	margin-left: -20%;
+	position: absolute;
+	width: 20%;
+}
+
+#dist-summary {
+	float: right;
+	margin-left: 50%;
+	position: absolute;
+}
+
+.filter-heading {
+	margin: 0px;
+}
+
+.row {
+	height: 80px;
+}
+
+@media screen and (max-width:1000px){
+	#filters {
+		position: relative;
+		margin: 0px;
+	}
+
+	#dist-summary {
+		margin: 0px;
+		position: relative;
+	}
+}
+
+@media screen and (max-width:1200px) and (min-width:1000px) {
+	.content-column {
+		max-width: 500px;
+	}
+	#filters {
+		margin-left: -25%;
+	}
+}
+
+.radio-inline {
+	margin-left: 15%;
+	font-size: 20px;
+	padding: 5px;
+}
+
+#filter-head {
+	margin-left: 25%;
+}
+
+#reset-filters-btn {
+	margin-left: 20%;
+}
