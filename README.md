@@ -64,3 +64,25 @@ The whole process of downloading and preprocessing would likely take a couple of
   * `histogram.js` provides the bar charts visualizing the distribution of four attributes.
 
 * `lib` contains JavaScript libraries used. It currently includes D3.
+
+## IEEE Vis 2020
+
+Paper and Supplementary Materials can be found at: https://osf.io/zkxv9/
+
+Watch a short 30s video teaser:
+
+![](/videos/metadatavis-preview.mp4)
+
+or a 7 minute demo video:
+
+![](/videos/metadatavis-fullvideo.mp4)
+
+
+## Authors
+
+The authors are: [Neha Makhija](https://www.khoury.northeastern.edu/people/neha-makhija/),
+      [Mansi Jain](https://www.linkedin.com/in/jmansi/),
+      [Nikolaos Tziavelis](https://www.khoury.northeastern.edu/people/nikolaos-tziavelis/),
+      [Laura Di Rocco](https://www.khoury.northeastern.edu/people/laura-di-rocco/),
+      [Sara Di Bartolomeo](https://www.khoury.northeastern.edu/people/sara-di-bartolomeo/),
+      [Cody Dunne](https://cody.khoury.northeastern.edu/).
