@@ -69,14 +69,6 @@ The whole process of downloading and preprocessing would likely take a couple of
 
 Paper and Supplementary Materials can be found at: https://osf.io/zkxv9/
 
-Watch a short 30s video teaser:
-
-![](/videos/metadatavis-preview.mp4)
-
-or a 7 minute demo video:
-
-![](/videos/metadatavis-fullvideo.mp4)
-
 
 ## Authors
 
